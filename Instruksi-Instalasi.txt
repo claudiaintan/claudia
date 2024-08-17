@@ -1,0 +1,12 @@
+1. Install XAMPP
+2. Install Composer dan dicentang add to path nya
+3. Extract zip nya
+4. buka cmd di folder tersebut (pakai vscode bisa) ketik composer install
+5. apache dan mysql di XAMPP (pastikan versi terbaru)
+6. buka phpmyadmin buat database rumah_qeeta
+7. ketik php artisan migrate:fresh --seed (untuk membuat database nya)
+8. ketik php artisan storage:link (buat upload file)
+9. ketik php artisan serve (untuk membuka webnya)
+
+username : admin
+password : admin
