@@ -105,7 +105,7 @@
 </div>
 
 <div class="sidebar d-flex flex-column p-3">
-    @if (Auth::user()->role == 'ADMIN')
+    @if (auth()->user()->hasRole('ADMIN'))
     <h5>Dashboard</h5>
     <ul class="nav flex-column">
         <li class="nav-item">
