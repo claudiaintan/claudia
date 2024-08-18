@@ -18,9 +18,11 @@ return new class extends Migration
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Pelanggan::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignIdFor(Ongkir::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('kodepos', 255);
-            $table->string('alamat', 255);
+            $table->text('catatan')->nullable();
+            $table->string('kurir')->nullable();
+            $table->string('layanan');
+            $table->decimal('total', 65, 0)->nullable();
+
             $table->enum('status', StatusKirim::toArray())->default(StatusKirim::PROSES->name);
             $table->timestamps();
         });

@@ -13,7 +13,7 @@ class RajaOngkirService
     public function __construct()
     {
         $this->client = new Client();
-        $this->apiKey = env('RAJAONGKIR_API_KEY');
+        $this->apiKey = env('RAJAONGKIR_API_KEY', '2d418131a9818f8a33a03e669509aca2');
         $this->baseUri = env('RAJAONGKIR_BASE_URI', 'https://api.rajaongkir.com/starter/');
     }
 
@@ -36,6 +36,20 @@ class RajaOngkirService
             ],
             'query' => [
                 'province' => $provinceId,
+            ],
+        ]);
+
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    public function getCity($id)
+    {
+        $response = $this->client->get($this->baseUri . 'city', [
+            'headers' => [
+                'key' => $this->apiKey,
+            ],
+            'query' => [
+                'id' => $id,
             ],
         ]);
 

@@ -15,8 +15,10 @@ return new class extends Migration
         Schema::create('pelanggans', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('alamat', 255);
-            $table->string('no_telp', 255);
+            $table->string('alamat')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->unsignedInteger('province_id')->nullable();
+            $table->unsignedInteger('city_id')->nullable();
             $table->timestamps();
         });
     }

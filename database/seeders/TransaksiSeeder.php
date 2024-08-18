@@ -40,21 +40,21 @@ class TransaksiSeeder extends Seeder
         Produk::factory(5)->for($kategoris[2])->create();
         $produk = Produk::factory()->for($kategoris[0])->create();
         $produk1 = Produk::factory()->for($kategoris[1])->create();
-        $produk2 = Produk::factory()->for($kategoris[1])->create();
+        $produk2 = Produk::factory()->for($kategoris[3])->create();
 
-        Keranjang::factory()->for($produk)->for($pelanggan)->create();
-        Keranjang::factory()->for($produk1)->for($pelanggan)->create();
-        Keranjang::factory()->for($produk2)->for($pelanggan)->create();
-        $transaksi = Transaksi::factory()->for($pelanggan)->for($ongkir)->create();
-        BarangTransaksi::factory()->for($transaksi)->for($produk)->create();
+        // Keranjang::factory()->for($produk)->for($pelanggan)->create();
+        // Keranjang::factory()->for($produk1)->for($pelanggan)->create();
+        // Keranjang::factory()->for($produk2)->for($pelanggan)->create();
+        // $transaksi = Transaksi::factory()->for($pelanggan)->for($ongkir)->create();
+        // BarangTransaksi::factory()->for($transaksi)->for($produk)->create();
 
-        $transaksiBayar = Transaksi::factory()->for($pelanggan)->for($ongkir)->create();
-        BarangTransaksi::factory()->for($transaksiBayar)->for($produk1)->create();
-        BuktiPembayaran::factory()->for($transaksiBayar)->create();
+        // $transaksiBayar = Transaksi::factory()->for($pelanggan)->for($ongkir)->create();
+        // BarangTransaksi::factory()->for($transaksiBayar)->for($produk1)->create();
+        // BuktiPembayaran::factory()->for($transaksiBayar)->create();
 
-        $transaksiBayar = Transaksi::factory()->for($pelanggan)->for($ongkir)->create();
-        BarangTransaksi::factory()->for($transaksiBayar)->for($produk1)->create();
-        BarangTransaksi::factory()->for($transaksiBayar)->for($produk2)->create();
-        BuktiPembayaran::factory()->for($transaksiBayar)->create();
+        // $transaksiBayar = Transaksi::factory()->for($pelanggan)->for($ongkir)->create();
+        // BarangTransaksi::factory()->for($transaksiBayar)->for($produk1)->create();
+        // BarangTransaksi::factory()->for($transaksiBayar)->for($produk2)->create();
+        // BuktiPembayaran::factory()->for($transaksiBayar)->create();
     }
 }

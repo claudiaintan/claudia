@@ -73,7 +73,7 @@
                         <th>Id</th>
                         <th>Status Pengiriman</th>
                         <th>Status Bayar</th>
-                        <th>Ongkir</th>
+                        <th>Jenis Layanan</th>
                         <th>Catatan</th>
                         <th>Bobot</th>
                         <th>Total Bayar</th>
@@ -87,7 +87,7 @@
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->status->display() }}</td>
                         <td>{{ $item->buktiPembayaran ? $item->buktiPembayaran->status->display() : "Belum Bayar" }}</td>
-                        <td>{{ $item->ongkir->nama }}</td>
+                        <td>{{ $item->layanan }}</td>
                         <td>{{ $item->catatan }}</td>
                         <td>{{ $item->bobot() }} gr</td>
                         <td>Rp {{ number_format($item->harga(), 0, ',', '.') }}</td>

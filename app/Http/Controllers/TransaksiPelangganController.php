@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTransaksiPelangganRequest;
 use App\Models\Keranjang;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiPelangganController extends Controller
 {
@@ -28,19 +29,22 @@ class TransaksiPelangganController extends Controller
     public function store(StoreTransaksiRequest $request)
     {
         $data = $request->validated();
-    
-        if (!auth()->user()->pelanggan->keranjang()->exists()) {
+
+        if (!Auth::user()->pelanggan->keranjang()->exists()) {
             return redirect()->back()->withErrors(['Keranjang kosong']);
         }
-    
-        $transaksi = auth()->user()->pelanggan->transaksi()->create([
-            'alamat' => $data['alamat'],
+
+        $cleanedString = preg_replace('/\x{00A0}/u', ' ', $data['layanan']);
+
+        $transaksi = Auth::user()->pelanggan->transaksi()->create([
             'catatan' => $data['catatan'],
-            'kodepos' => $data['kodepos'],
-            'ongkir_id' => $data['ongkir'],
+            'kurir' => $data['kurir'],
+            'layanan' => $cleanedString,
+            'total' => $data['total'],
         ]);
 
-        $barang = auth()->user()->pelanggan->keranjang;
+
+        $barang = Auth::user()->pelanggan->keranjang;
         $barang->load('produk');
         $barang->map(function ($item) use ($transaksi) {
             $transaksi->barangTransaksi()->create([

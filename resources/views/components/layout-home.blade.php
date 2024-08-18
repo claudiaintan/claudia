@@ -139,6 +139,7 @@
                             @if(auth()->user()->hasRole('ADMIN'))
                             <li><a class="dropdown-item" href="{{  route('dashboard')  }}">Dashboard</a></li>
                             @else
+                            <li><a class="dropdown-item" href="{{  route('profile.edit', Auth::id())  }}">Edit Profile</a></li>
                             <li><a class="dropdown-item" href="{{  route('pelanggan.transaksi.index')  }}">Histori Transaksi</a></li>
                             @endif
                             <li><hr class="dropdown-divider"></li>
@@ -186,7 +187,7 @@
             <div class="w-100 footer-info">
             <h4>Contact Us</h4>
             <p><strong>Email:</strong> <a href="mailto:dpc.rumahqeeta@gmail.com" class="footer-link">dpc.rumahqeeta@gmail.com</a></p>
-            <p><strong>Address:</strong> 
+            <p><strong>Address:</strong>
             <a href="https://maps.app.goo.gl/LW2YCLYPFQMXgmD6A" target="_blank" class="footer-link" style="display: block; text-align: justify;">
                 Sukorejo RT 26/RW 09, Gang 1, Kroyo, Kec. Karangmalang, Kabupaten Sragen, Jawa Tengah 57221
             </a>
@@ -194,4 +195,8 @@
             </div>
         </div>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    @isset($scripts)
+        {{ $scripts }}
+    @endisset
 </x-layout>

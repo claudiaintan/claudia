@@ -97,8 +97,8 @@
                 <td>{{ $transaksi->buktiPembayaran ? $transaksi->buktiPembayaran->status->display() : "Belum Bayar" }}</td>
             </tr>
             <tr>
-                <th>Ongkir</th>
-                <td>{{ $transaksi->ongkir->nama }}</td>
+                <th>Jenis Layanan</th>
+                <td>{{ $transaksi->layanan }}</td>
             </tr>
             <tr>
                 <th>Bobot</th>

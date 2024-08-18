@@ -22,11 +22,11 @@ class StoreTransaksiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ongkir' => ['required', 'string', 'exists:ongkirs,id'],
-            'alamat' => ['required', 'string', 'max:255'],
-            'kodepos' => ['required', 'string', 'max:255'],
+            'kurir' => ['required'],
+            'layanan' => ['required', 'string', 'max:255'],
             'bayar' => ['nullable', 'image'],
             'catatan' => ['nullable', 'string', 'max:1000'],
+            'total' => ['nullable', 'numeric'],
         ];
     }
 }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Pelanggan::class)->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('file', 255);
             $table->integer('jumlah');
+            $table->text('catatan')->nullable();
             $table->timestamps();
         });
     }

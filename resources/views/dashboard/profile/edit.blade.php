@@ -8,25 +8,64 @@
     </x-slot:title>
 
     <div class="d-flex justify-content-center align-items-center w-100 h-100">
-        <form action="{{ route('dashboard.profile.update') }}" method="post" class="card p-5 d-flex flex-column gap-2" style="min-width: 75%">
+        @php
+            if (Auth::user()->role == 'ADMin') {
+                $url = route('dashboard.profile.update');
+            } else {
+                $url = route('profile.update');
+            }
+        @endphp
+        <form action="{{ $url }}" method="post" class="card p-5 d-flex flex-column gap-2" style="min-width: 75%">
             <h4 class="text-center mb-5">Edit Profile</h4>
             @csrf
             @method('put')
-
+            <input type="hidden" name="user_id" value="{{ $user->id }}">
             <div class="form-group">
                 <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ $user->name }}">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ $user->name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ $user->email }}" required>
             </div>
 
             <div class="form-group">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
             </div>
+            <hr>
+            @if (Auth::user()->role != 'ADMIN')
+            <h5>Alamat</h5>
 
             <div class="form-group">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ $user->email }}">
+                <label for="province_id" class="form-label">Provinsi</label>
+                <select name="province_id" id="province_id" class="form-select w-100 select2" data-placeholder="Pilih Provinsi" required>
+                    <option value=""></option>
+                    @foreach ($provinces as $opt)
+                        <option value="{{ $opt['province_id'] }}" @if ($user->pelanggan->province_id == $opt['province_id']) selected @endif>{{ $opt['province'] }}</option>
+                    @endforeach
+                </select>
             </div>
+
+            <div class="form-group">
+                <label for="city_id" class="form-label">Kota/Kabupaten</label>
+                <select name="city_id" id="city_id" class="form-control select2" data-placeholder="Pilih" disabled required>
+                    <option value="{{ $user->pelanggan->city_id }}" selected></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="alamat" class="form-label">Alamat</label>
+                <textarea name="alamat" id="alamat" class="form-control" required>{{ $user->pelanggan->alamat }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="alamat" class="form-label">No Telepon</label>
+                <input type="text" class="form-control" name="no_telp" id="no_telp" value="{{ $user->pelanggan->no_telp }}" required>
+            </div>
+
+            @endif
 
             @if ($errors->any())
                 <div class="alert alert-danger pt-3">
@@ -42,9 +81,55 @@
                 </div>
             @endif
 
-            <div class="form-group">
-                <input type="submit" value="Edit" class="btn btn-primary">
+            <div class="form-group text-end">
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>
     </div>
+    @slot('scripts')
+        @if (Auth::user()->role != 'ADMIN')
+            <script>
+                $(function () {
+                    $('#province_id').change(function (e) {
+                        e.preventDefault();
+                        var value = $(this).val();
+
+                        if (value != '') {
+                            $('#city_id').removeAttr('disabled');
+                            getCities(value)
+
+                        } else {
+                            $('#city_id').attr('disabled', true);
+                            $('#city_id').html('');
+                        }
+
+                    }).change();
+                });
+
+                function getCities(id) {
+                    var city_id = $('#city_id').val();
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ route('cities') }}",
+                        data: {
+                            id: id,
+                        },
+                        cache: false,
+                        success: function(response) {
+                            var text = '';
+                            $.each(response, function (i, v) {
+                                var selected = city_id == v.city_id ? 'selected' : '';
+                                text += `<option value="${v.city_id}" ${selected}>${v.city_name}</option>`
+                            });
+
+                            $('#city_id').html(text);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                }
+            </script>
+        @endif
+    @endslot
 </x-dashboard-template>

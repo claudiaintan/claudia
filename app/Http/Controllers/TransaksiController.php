@@ -138,7 +138,7 @@ class TransaksiController extends Controller
     public function cetak()
     {
         ini_set('max_execution_time', 300);
-        $transaksi = Transaksi::with('pelanggan.user')->with('ongkir')->with('barangTransaksi.produk')->with('buktiPembayaran')->latest()->get();
+        $transaksi = Transaksi::with(['pelanggan.user', 'barangTransaksi.produk', 'buktiPembayaran'])->latest()->get();
         $pdf = Pdf::loadView('pdf.history', [
             'transaksi' => $transaksi
         ]);

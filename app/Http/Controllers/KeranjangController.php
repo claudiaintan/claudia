@@ -6,9 +6,17 @@ use App\Models\Keranjang;
 use App\Http\Requests\StoreKeranjangRequest;
 use App\Http\Requests\UpdateKeranjangRequest;
 use App\Models\Ongkir;
+use App\Services\RajaOngkirService;
+use Illuminate\Support\Facades\Auth;
 
 class KeranjangController extends Controller
 {
+    protected $rajaOngkirService;
+
+    public function __construct(RajaOngkirService $rajaOngkirService)
+    {
+        $this->rajaOngkirService = $rajaOngkirService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -22,11 +30,15 @@ class KeranjangController extends Controller
             return $item->jumlah * $item->produk->bobot + $total;
         }, 0);
 
+        $city_id = Auth::user()->pelanggan->city_id;
+        $city = $this->rajaOngkirService->getCity($city_id);
+        $city = $city['rajaongkir']['results'];
         return view('pelanggan.keranjang.index', [
             'keranjang' => $keranjang,
             'total' => $total,
             'bobot' => $bobot,
             'ongkir' => Ongkir::all(),
+            'city'  => $city,
         ]);
     }
 

@@ -4,48 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Title' }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif; 
+            font-family: 'Roboto', sans-serif;
         }
         .sidebar {
-            background: #333; 
+            background: #333;
             color: white;
             min-height: 100vh;
             width: 250px;
             position: fixed;
             font-weight: bold;
             transition: transform 0.3s ease;
-            transform: translateX(0); 
+            transform: translateX(0);
         }
         .sidebar.collapsed {
-            transform: translateX(-250px); 
+            transform: translateX(-250px);
         }
         .sidebar .nav-link {
             color: white;
-            font-weight: bold; 
+            font-weight: bold;
             display: flex;
             align-items: center;
-            padding: 10px; 
-            text-decoration: none; 
+            padding: 10px;
+            text-decoration: none;
         }
         .sidebar .nav-link .fa {
-            margin-right: 20px; 
+            margin-right: 20px;
         }
         .sidebar .nav-link.active {
-            background-color: #444; 
+            background-color: #444;
             color: white;
         }
         .topbar {
-            background: #ff6600; 
+            background: #ff6600;
             color: white;
             display: flex;
             align-items: center;
             padding: 0.5rem 1rem;
-            font-weight: bold; 
+            font-weight: bold;
         }
         .topbar img {
             height: 42px;
@@ -59,14 +60,18 @@
             margin-left: 250px;
             padding: 20px;
             font-weight: normal;
-            color: #333; 
+            color: #333;
             transition: margin-left 0.3s ease;
         }
         .content.shifted {
             margin-left: 0;
         }
         .dropdown-menu {
-            font-weight: normal; 
+            font-weight: normal;
+        }
+
+        .select2-container {
+            width: 100% !important;
         }
     </style>
 </head>
@@ -100,6 +105,7 @@
 </div>
 
 <div class="sidebar d-flex flex-column p-3">
+    @if (Auth::user()->role == 'ADMIN')
     <h5>Dashboard</h5>
     <ul class="nav flex-column">
         <li class="nav-item">
@@ -163,6 +169,7 @@
             </div>
         </li>
     </ul>
+    @endif
 
     <h5>Pengaturan</h5>
     <ul class="nav flex-column">
@@ -179,7 +186,9 @@
     {{ $slot }}
 </div>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 <script>
     document.getElementById('sidebar-hamburger').addEventListener('click', function() {
@@ -188,6 +197,14 @@
         sidebar.classList.toggle('collapsed');
         content.classList.toggle('shifted');
     });
+    $(function () {
+        $('.select2').select2({
+            allowClear: true,
+        })
+    });
 </script>
+@isset($scripts)
+    {{ $scripts }}
+@endisset
 </body>
 </html>
