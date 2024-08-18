@@ -105,7 +105,7 @@ class TransaksiPelangganController extends Controller
         $transaksi->load('buktiPembayaran');
         $transaksi->load('barangTransaksi.produk');
         $transaksi->load('pelanggan.user');
-        $transaksi->load('ongkir');
+        // $transaksi->load('ongkir');
         $total = 0;
         $totalItem = 0;
         $bobotBersih = 0;
@@ -118,7 +118,7 @@ class TransaksiPelangganController extends Controller
         $bobot = $bobotBersih < 1000 ? 1 : $bobotBersih / 1000;
         return view('pelanggan.transaksi.edit', [
             'transaksi' => $transaksi,
-            'ongkir' => ($bobot * $transaksi->ongkir->harga),
+            // 'ongkir' => ($bobot * $transaksi->ongkir->harga),
             'total' => $total + ($bobot * $transaksi->ongkir->harga),
             'bobot' => $bobotBersih,
             'totalItem' => $totalItem,

@@ -9,7 +9,7 @@
 
     <div class="d-flex justify-content-center align-items-center w-100 h-100">
         @php
-            if (Auth::user()->role == 'ADMin') {
+            if (auth()->user()->hasRole('ADMIN')) {
                 $url = route('dashboard.profile.update');
             } else {
                 $url = route('profile.update');
@@ -35,7 +35,7 @@
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password">
             </div>
             <hr>
-            @if (Auth::user()->role != 'ADMIN')
+            @if (auth()->user()->hasRole('PELANGGAN'))
             <h5>Alamat</h5>
 
             <div class="form-group">
@@ -87,7 +87,7 @@
         </form>
     </div>
     @slot('scripts')
-        @if (Auth::user()->role != 'ADMIN')
+        @if (auth()->user()->hasRole('PELANGGAN'))
             <script>
                 $(function () {
                     $('#province_id').change(function (e) {

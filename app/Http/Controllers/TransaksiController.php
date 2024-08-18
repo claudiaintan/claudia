@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaksi;
 use App\Http\Requests\StoreTransaksiRequest;
 use App\Http\Requests\UpdateTransaksiRequest;
+use App\Services\RajaOngkirService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -12,6 +13,12 @@ use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
 {
+    protected $rajaOngkirService;
+
+    public function __construct(RajaOngkirService $rajaOngkirService)
+    {
+        $this->rajaOngkirService = $rajaOngkirService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -57,24 +64,23 @@ class TransaksiController extends Controller
         $transaksi->load('buktiPembayaran');
         $transaksi->load('barangTransaksi.produk');
         $transaksi->load('pelanggan.user');
-        $transaksi->load('ongkir');
         $total = 0;
         $totalItem = 0;
         $bobotBersih = 0;
         foreach ($transaksi->barangTransaksi as $item) {
             $total += $item->jumlah * $item->produk->harga;
             $totalItem += $item->jumlah;
-            $bobotBersih = $item->jumlah * $item->produk->bobot;
+            $bobotBersih += $item->jumlah * $item->produk->bobot;
         }
-
-        $bobot = $bobotBersih < 1000 ? 1 : $bobotBersih / 1000;
+        $city_id = $transaksi->pelanggan->city_id;
+        $city = $this->rajaOngkirService->getCity($city_id);
+        $city = $city['rajaongkir']['results'];
         return view('master.transaksi.show', [
             'transaksi' => $transaksi,
-            'ongkir' => ($bobot * $transaksi->ongkir->harga),
-            'total' => $total + ($bobot * $transaksi->ongkir->harga),
             'bobot' => $bobotBersih,
             'totalItem' => $totalItem,
             'totalBersih' => $total,
+            'city' => $city,
         ]);
     }
 
@@ -86,21 +92,17 @@ class TransaksiController extends Controller
         $transaksi->load('buktiPembayaran');
         $transaksi->load('barangTransaksi.produk');
         $transaksi->load('pelanggan.user');
-        $transaksi->load('ongkir');
         $total = 0;
         $totalItem = 0;
         $bobotBersih = 0;
         foreach ($transaksi->barangTransaksi as $item) {
             $total += $item->jumlah * $item->produk->harga;
             $totalItem += $item->jumlah;
-            $bobotBersih = $item->jumlah * $item->produk->bobot;
+            $bobotBersih += $item->jumlah * $item->produk->bobot;
         }
 
-        $bobot = $bobotBersih < 1000 ? 1 : $bobotBersih / 1000;
         return view('master.transaksi.edit', [
             'transaksi' => $transaksi,
-            'ongkir' => ($bobot * $transaksi->ongkir->harga),
-            'total' => $total + ($bobot * $transaksi->ongkir->harga),
             'bobot' => $bobotBersih,
             'totalItem' => $totalItem,
             'totalBersih' => $total,

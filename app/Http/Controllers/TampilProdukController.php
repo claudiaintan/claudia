@@ -11,10 +11,16 @@ class TampilProdukController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = strtoupper($request->search);
+        $produk = Produk::whereRaw('nama LIKE ?', ["%".$search."%"])
+            ->orWhereHas('kategori', function ($q) use ($search) {
+                $q->whereRaw('nama LIKE ?', ["%".$search."%"]);
+            })
+            ->paginate(5);
         return view('produk.index', [
-            'produk' => Produk::with('kategori')->paginate(5),
+            'produk' => $produk,
         ]);
     }
 

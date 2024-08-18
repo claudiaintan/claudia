@@ -23,7 +23,7 @@ class UpdateProfileAdminRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'max:255'],
+            'password' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
         ];
     }

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Services\RajaOngkirService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
@@ -32,6 +33,11 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $user = User::find($request->user_id);
+        $user->update([
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'password'  => $request->password ? Hash::make($request->password) : $user->password,
+        ]);
         $pelanggan = Pelanggan::where('user_id', $user->id);
         $pelanggan->update([
             'province_id'   => $request->province_id,
@@ -41,8 +47,10 @@ class ProfileController extends Controller
         ]);
 
         if ($pelanggan) {
+            Auth::logout();
             $request->session()->invalidate();
-            $request->session()->regenerate();
+            $request->session()->regenerateToken();
+            Auth::login($user);
             return redirect()->back()->with('message', 'Data Berhasil di update');
         }
 
