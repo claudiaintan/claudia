@@ -78,4 +78,9 @@ class ProfileController extends Controller
         $cost = $cost['rajaongkir']['results'];
         return response()->json($cost);
     }
+
+    public function caraPemesanan()
+    {
+        return view('cara-pemesanan');
+    }
 }

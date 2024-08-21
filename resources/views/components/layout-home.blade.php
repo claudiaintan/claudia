@@ -100,7 +100,10 @@
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteName() == 'produk.index' ? 'active' : ''}}" href="{{ route('produk.index') }}">Produk</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteName() == 'cara-pemesanan' ? 'active' : ''}}" href="{{ route('cara-pemesanan') }}">Cara Pemesanan</a>
+                    </li>
+                    {{-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {{ Route::is('produk.byKategori') ? 'active' : ''}}" href="#" id="kategoriDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Kategori
                         </a>
@@ -110,7 +113,7 @@
                             <li><a class="dropdown-item" href="{{ route('produk.byKategori', ['kategoriId' => 3]) }}">Merchandise dan souvenir</a></li>
                             <li><a class="dropdown-item" href="{{ route('produk.byKategori', ['kategoriId' => 4]) }}">Spanduk dan banner</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
 
                 <!-- Search Form -->
@@ -165,7 +168,7 @@
         </div>
     </nav>
 
-    <main class="my-5">
+    <main>
         {{ $slot }}
     </main>
 

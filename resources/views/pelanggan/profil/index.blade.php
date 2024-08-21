@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    <div class="d-flex justify-content-center align-items-center w-100 h-100">
+    <div class="d-flex justify-content-center align-items-center w-100 h-100 my-5">
         <form action="{{ route('profile.update') }}" method="post" class="card p-5 d-flex flex-column gap-2" style="min-width: 75%">
             <h4 class="text-center mb-5">Edit Profile</h4>
             @csrf

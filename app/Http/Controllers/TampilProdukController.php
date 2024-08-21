@@ -14,13 +14,23 @@ class TampilProdukController extends Controller
     public function index(Request $request)
     {
         $search = strtoupper($request->search);
-        $produk = Produk::whereRaw('nama LIKE ?', ["%".$search."%"])
-            ->orWhereHas('kategori', function ($q) use ($search) {
-                $q->whereRaw('nama LIKE ?', ["%".$search."%"]);
-            })
-            ->paginate(5);
+        $kategoriId = $request->kategori_id;
+        $produk = Produk::where(function($query) use($search) {
+            $query->where('nama', 'LIKE', "%{$search}%")
+                    ->orWhereHas('kategori', function ($q) use ($search) {
+                        $q->where('nama', 'LIKE', "%{$search}%");
+                    });
+        });
+
+        if ($kategoriId) {
+            $produk->where('kategori_id', $kategoriId);
+        }
+
+        $produk = $produk->paginate(6);
+        $kategori = Kategori::all();
         return view('produk.index', [
             'produk' => $produk,
+            'kategori' => $kategori,
         ]);
     }
 

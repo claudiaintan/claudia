@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeController::class)->name('home');
 Route::get('getCities', [ProfileController::class, 'cities'])->name('cities');
 Route::get('getCost', [ProfileController::class, 'cost'])->name('cost');
+Route::get('cara-pemesanan', [ProfileController::class, 'caraPemesanan'])->name('cara-pemesanan');
 
 Route::resource('/produk', TampilProdukController::class)->only(['index', 'show'])->names('produk');
 Route::get('/produk/kategori/{kategoriId}', [TampilProdukController::class, 'byKategori'])->name('produk.byKategori');
