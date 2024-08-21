@@ -13,7 +13,7 @@ class RajaOngkirService
     public function __construct()
     {
         $this->client = new Client();
-        $this->apiKey = env('RAJAONGKIR_API_KEY', '2d418131a9818f8a33a03e669509aca2');
+        $this->apiKey = config('app.rajaongkir_key');
         $this->baseUri = env('RAJAONGKIR_BASE_URI', 'https://api.rajaongkir.com/starter/');
     }
 

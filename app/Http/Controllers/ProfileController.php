@@ -24,7 +24,7 @@ class ProfileController extends Controller
         $user = User::find($id);
         $provinces = $this->rajaOngkirService->getProvinces();
         $provinces = $provinces['rajaongkir']['results'];
-        return view('dashboard.profile.edit', compact('user', 'provinces'));
+        return view('pelanggan.profil.index', compact('user', 'provinces'));
     }
 
     /**
