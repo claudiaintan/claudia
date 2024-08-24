@@ -8,7 +8,7 @@ class AddOngkirIdToTransaksisTable extends Migration
     public function up()
     {
         Schema::table('transaksis', function (Blueprint $table) {
-            $table->foreignId('ongkir_id')->constrained('ongkirs');
+            $table->foreignId('ongkir_id')->nullable()->constrained('ongkirs');
         });
     }
 
