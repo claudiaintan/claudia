@@ -10,14 +10,18 @@
             background-size: cover;
         }
         .login-container {
-            background: rgba(255, 87, 34, 0.9);
+            background: rgba(255, 152, 0, 0.9); /* Orange-yellow background */
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
             color: #fff;
             max-width: 350px;
             width: 100%;
             padding: 25px;
             margin: 20px;
+            transition: transform 0.3s;
+        }
+        .login-container:hover {
+            transform: scale(1.02); /* Slight zoom effect on hover */
         }
         .login-title {
             font-family: 'Poppins', sans-serif;
@@ -25,37 +29,45 @@
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 20px;
-            margin-bottom: 15px;
+            font-size: 24px; /* Larger title for better visibility */
+            margin-bottom: 20px;
+            text-align: center;
         }
         .login-form {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px; /* Increased gap for better spacing */
         }
         .login-input {
-            border-radius: 4px;
-            border: 1px solid #ccc;
+            border-radius: 8px; /* Rounded corners */
+            border: 1px solid #fff; /* White border */
             color: #333;
-            padding: 10px;
-            font-size: 14px;
+            padding: 12px; /* More padding for comfort */
+            font-size: 16px; /* Larger font size for readability */
+            transition: border-color 0.3s;
+        }
+        .login-input:focus {
+            border-color: #ffeb3b; /* Yellow border on focus */
+            outline: none;
         }
         .login-button {
-            background-color: #333;
+            background-color: #ff5722; /* Orange button */
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             color: #fff;
-            padding: 10px;
-            font-size: 14px;
-            transition: background-color 0.3s;
+            padding: 12px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
         }
         .login-button:hover {
-            background-color: #555;
+            background-color: #e64a19; /* Darker orange on hover */
+            transform: scale(1.05); /* Slightly bigger button on hover */
         }
         .alert {
             border-radius: 4px;
             font-size: 14px;
             padding: 10px;
+            margin-top: 10px;
         }
         .show-password-container {
             display: flex;
@@ -70,7 +82,7 @@
 
     <div class="d-flex justify-content-center align-items-center" style="width: 100vw; height: 100vh">
         <div class="login-container">
-            <h1 class="text-center login-title">Admin Login</h1>
+            <h1 class="login-title">Admin Login</h1>
 
             <form action="{{ route('auth.post-admin-login') }}" method="post" class="d-flex flex-column gap-3 login-form">
                 @csrf

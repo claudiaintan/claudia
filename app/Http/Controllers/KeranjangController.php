@@ -91,8 +91,14 @@ class KeranjangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Keranjang $keranjang)
+
+
+    public function destroy(keranjang $keranjang)
     {
-        //
+        if (keranjang::destroy($keranjang->id)) {
+            return redirect()->back()->with('message', 'Data berhasil dihapus!');
+        }
+
+        return redirect()->back()->with('message', 'Data gagal dihapus!');
     }
 }

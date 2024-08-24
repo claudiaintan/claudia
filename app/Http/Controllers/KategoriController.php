@@ -76,6 +76,11 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        //
+        try {
+            $kategori->delete();
+            return redirect()->back()->with('message', 'data berhasil dihapus dari kategori');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['Gagal menghapus data dari kategori']);
+        }
     }
 }

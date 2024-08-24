@@ -87,6 +87,11 @@ class ProdukController extends Controller
      */
     public function destroy(Produk $produk)
     {
-        //
+        try {
+            $produk->delete();
+            return redirect()->back()->with('message', 'Item berhasil dihapus dari produk');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['Gagal menghapus item dari produk']);
+        }
     }
 }

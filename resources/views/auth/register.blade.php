@@ -4,70 +4,85 @@
     </x-slot:title>
 
     <style>
+        body {
+            background: linear-gradient(135deg, #ffe29f, #ffa751);
+        }
         .registration-container {
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            max-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            max-width: 400px;
             width: 100%;
             margin: 20px;
+            border: 2px solid #ffa751;
         }
         .registration-title {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: center;
+            color: #ff8c00;
         }
         .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .form-label {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 16px;
+            color: #ff8c00;
         }
         .form-control {
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            padding: 8px;
-            font-size: 14px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .form-control:focus {
+            border-color: #ffa751;
+            box-shadow: 0 0 0 3px rgba(255, 167, 81, 0.3);
         }
         .btn-primary {
-            background-color: #007bff;
+            background-color: #ffa751;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             color: #fff;
-            padding: 10px;
-            font-size: 14px;
-            transition: background-color 0.3s;
+            padding: 12px;
+            font-size: 16px;
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
         .btn-primary:hover {
-            background-color: #0056b3;
+            background-color: #ff8c00;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         .alert {
-            border-radius: 4px;
-            font-size: 14px;
-            padding: 8px;
-            margin-bottom: 10px;
+            border-radius: 8px;
+            font-size: 16px;
+            padding: 12px;
+            margin-bottom: 20px;
         }
         .alert-success {
             background-color: #d4edda;
             color: #155724;
+            border-left: 5px solid #28a745;
         }
         .alert-danger {
             background-color: #f8d7da;
             color: #721c24;
+            border-left: 5px solid #dc3545;
         }
         .login-link {
-            color: #007bff;
+            color: #ff8c00;
             text-decoration: none;
+            font-weight: 600;
         }
         .login-link:hover {
             text-decoration: underline;
         }
     </style>
 
-    <div class="d-flex justify-content-center align-items-center" style="width: 100vw; height: 100vh">
+    <div class="d-flex justify-content-center align-items-center" style="width: 100vw; height: 100vh;">
         <div class="registration-container">
             <h1 class="registration-title">Registrasi</h1>
 

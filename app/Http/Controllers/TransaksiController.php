@@ -134,17 +134,26 @@ class TransaksiController extends Controller
      */
     public function destroy(Transaksi $transaksi)
     {
-        //
+        try {
+            $transaksi->delete();
+            return redirect()->back()->with('message', 'data berhasil dihapus dari transaksi');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['Gagal menghapus data dari transaksi']);
+        }
     }
 
     public function cetak()
     {
         ini_set('max_execution_time', 300);
-        $transaksi = Transaksi::with(['pelanggan.user', 'barangTransaksi.produk', 'buktiPembayaran'])->latest()->get();
-        $pdf = Pdf::loadView('pdf.history', [
+        $transaksi = Transaksi::with(['pelanggan.user', 'barangTransaksi.produk', 'buktiPembayaran', 'ongkir'])->latest()->get();
+    
+        // Ensure the view file path and variable name are correct
+        $pdf = Pdf::loadView('pdf.transaksi', [
             'transaksi' => $transaksi
         ]);
-
-        return $pdf->download('transaksi.pdf');
+    
+        $filename = 'transaksi_' . now()->format('Ymd_His') . '.pdf';
+    
+        return $pdf->download($filename);
     }
 }

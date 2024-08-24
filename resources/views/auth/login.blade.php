@@ -5,30 +5,31 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            background: linear-gradient(135deg, #ffe29f, #ffa751);
         }
         .login-container {
             background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
             padding: 40px;
             max-width: 400px;
             width: 100%;
             margin: 20px;
+            border: 2px solid #ffa751;
         }
         .login-title {
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 20px;
             text-align: center;
-            color: #333;
+            color: #ff8c00;
         }
         .form-group {
             margin-bottom: 20px;
         }
         .form-label {
             font-weight: 600;
-            color: #555;
+            color: #ff8c00;
         }
         .form-control {
             border-radius: 8px;
@@ -38,11 +39,11 @@
             transition: border-color 0.3s;
         }
         .form-control:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.2);
+            border-color: #ffa751;
+            box-shadow: 0 0 0 3px rgba(255, 167, 81, 0.3);
         }
         .btn-primary {
-            background-color: #007bff;
+            background-color: #ffa751;
             border: none;
             border-radius: 8px;
             color: #fff;
@@ -51,8 +52,8 @@
             transition: background-color 0.3s, box-shadow 0.3s;
         }
         .btn-primary:hover {
-            background-color: #0056b3;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #ff8c00;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
         .alert {
             border-radius: 8px;
@@ -63,13 +64,15 @@
         .alert-success {
             background-color: #d4edda;
             color: #155724;
+            border-left: 5px solid #28a745;
         }
         .alert-danger {
             background-color: #f8d7da;
             color: #721c24;
+            border-left: 5px solid #dc3545;
         }
         .register-link {
-            color: #007bff;
+            color: #ff8c00;
             text-decoration: none;
             font-weight: 600;
         }
@@ -78,7 +81,7 @@
         }
     </style>
 
-    <div class="d-flex justify-content-center align-items-center" style="width: 100vw; height: 100vh">
+    <div class="d-flex justify-content-center align-items-center" style="width: 100vw; height: 100vh;">
         <div class="login-container">
             <h1 class="login-title">Login</h1>
 

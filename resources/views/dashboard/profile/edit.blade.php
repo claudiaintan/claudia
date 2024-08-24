@@ -1,6 +1,5 @@
 <x-dashboard-template>
-   <x-slot:dropdownMaster>
-        1
+    <x-slot:dropdownMaster>
     </x-slot:dropdownMaster>
 
     <x-slot:title>
@@ -50,8 +49,8 @@
 
             <div class="form-group">
                 <label for="city_id" class="form-label">Kota/Kabupaten</label>
-                <select name="city_id" id="city_id" class="form-control select2" data-placeholder="Pilih" disabled required>
-                    <option value="{{ $user->pelanggan->city_id }}" selected></option>
+                <select name="city_id" id="city_id" class="form-select select2" data-placeholder="Pilih Kota/Kabupaten" required>
+                    <option value="{{ $user->pelanggan->city_id }}" selected>{{ $user->pelanggan->city->city_name ?? 'Pilih Kota/Kabupaten' }}</option>
                 </select>
             </div>
 
@@ -61,7 +60,7 @@
             </div>
 
             <div class="form-group">
-                <label for="alamat" class="form-label">No Telepon</label>
+                <label for="no_telp" class="form-label">No Telepon</label>
                 <input type="text" class="form-control" name="no_telp" id="no_telp" value="{{ $user->pelanggan->no_telp }}" required>
             </div>
 
@@ -86,49 +85,50 @@
             </div>
         </form>
     </div>
+
     @slot('scripts')
         @if (auth()->user()->hasRole('PELANGGAN'))
             <script>
-                $(function () {
-                    $('#province_id').change(function (e) {
-                        e.preventDefault();
-                        var value = $(this).val();
+                $(document).ready(function() {
+                    // Inisialisasi kota jika sudah ada provinsi yang dipilih
+                    let province_id = $('#province_id').val();
+                    if (province_id) {
+                        getCities(province_id);
+                    }
 
-                        if (value != '') {
+                    // Trigger ketika provinsi berubah
+                    $('#province_id').change(function () {
+                        let value = $(this).val();
+
+                        if (value) {
                             $('#city_id').removeAttr('disabled');
-                            getCities(value)
-
+                            getCities(value);
                         } else {
-                            $('#city_id').attr('disabled', true);
-                            $('#city_id').html('');
-                        }
-
-                    }).change();
-                });
-
-                function getCities(id) {
-                    var city_id = $('#city_id').val();
-                    $.ajax({
-                        type: "GET",
-                        url: "{{ route('cities') }}",
-                        data: {
-                            id: id,
-                        },
-                        cache: false,
-                        success: function(response) {
-                            var text = '';
-                            $.each(response, function (i, v) {
-                                var selected = city_id == v.city_id ? 'selected' : '';
-                                text += `<option value="${v.city_id}" ${selected}>${v.city_name}</option>`
-                            });
-
-                            $('#city_id').html(text);
-                        },
-                        error: function(xhr, status, error) {
-                            console.error(error);
+                            $('#city_id').attr('disabled', true).html('<option value="">Pilih Kota/Kabupaten</option>');
                         }
                     });
-                }
+
+                    function getCities(provinceId) {
+                        $.ajax({
+                            type: "GET",
+                            url: "{{ route('cities') }}",
+                            data: { id: provinceId },
+                            cache: false,
+                            success: function(response) {
+                                let options = '<option value="">Pilih Kota/Kabupaten</option>';
+                                $.each(response, function (index, city) {
+                                    let selected = city.city_id == '{{ $user->pelanggan->city_id }}' ? 'selected' : '';
+                                    options += `<option value="${city.city_id}" ${selected}>${city.city_name}</option>`;
+                                });
+
+                                $('#city_id').html(options);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error('Error:', error);
+                            }
+                        });
+                    }
+                });
             </script>
         @endif
     @endslot

@@ -1,43 +1,15 @@
 <x-layout-home>
     <x-slot:title>
-        Profil
+        Cara Pemesanan
     </x-slot:title>
-    <style>
-        /* Ensure no text decoration for specific links */
-        .no-decoration a {
-            text-decoration: none;
-        }
 
-        .icon-circle {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            background-color: #007bff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .icon-circle span {
-            font-weight: bold;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        /* Add hover effect for a more dynamic appearance */
-        .icon-circle:hover {
-            transform: scale(1.1);
-        }
-    </style>
-    <section class="bg-dark text-white my-4 p-5">
+    <section class="bg-dark text-white my-4 p-2">
         <div class="container p-5">
             <h1 class="text-center mb-4">Cara Pemesanan</h1>
             <div class="row">
                 <div class="col-md-6">
                     <div class="d-flex mb-4">
-                        <div class="icon-circle me-3">
+                        <div class="icon-circle bg-warning text-dark d-flex justify-content-center align-items-center me-3 " style="width: 40px; height: 40px; border-radius: 20%; ">
                             <span>1</span>
                         </div>
                         <div>
@@ -46,7 +18,7 @@
                         </div>
                     </div>
                     <div class="d-flex mb-4">
-                        <div class="icon-circle me-3">
+                        <div class="icon-circle bg-warning text-dark d-flex justify-content-center align-items-center me-3 " style="width: 40px; height: 40px; border-radius: 20%;">
                             <span>2</span>
                         </div>
                         <div>
@@ -55,7 +27,7 @@
                         </div>
                     </div>
                     <div class="d-flex mb-4">
-                        <div class="icon-circle me-3">
+                        <div class="icon-circle bg-warning text-dark d-flex justify-content-center align-items-center me-3 " style="width: 40px; height: 40px; border-radius: 20%;">
                             <span>3</span>
                         </div>
                         <div>
@@ -64,7 +36,7 @@
                         </div>
                     </div>
                     <div class="d-flex mb-4">
-                        <div class="icon-circle me-3">
+                        <div class="icon-circle bg-warning text-dark d-flex justify-content-center align-items-center me-3 " style="width: 40px; height: 40px; border-radius: 20%;">
                             <span>4</span>
                         </div>
                         <div>
@@ -75,7 +47,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="d-flex mb-4">
-                        <div class="icon-circle me-3">
+                        <div class="icon-circle bg-warning text-dark d-flex justify-content-center align-items-center me-3 " style="width: 40px; height: 40px; border-radius: 20%;">
                             <span>5</span>
                         </div>
                         <div>
@@ -84,7 +56,7 @@
                         </div>
                     </div>
                     <div class="d-flex mb-4">
-                        <div class="icon-circle me-3">
+                        <div class="icon-circle bg-warning text-dark d-flex justify-content-center align-items-center me-3 " style="width: 40px; height: 40px; border-radius: 20%;">
                             <span>6</span>
                         </div>
                         <div>
@@ -93,7 +65,7 @@
                         </div>
                     </div>
                     <div class="d-flex mb-4">
-                        <div class="icon-circle me-3">
+                        <div class="icon-circle bg-warning text-dark d-flex justify-content-center align-items-center me-3 " style="width: 40px; height: 40px; border-radius: 20%;">
                             <span>7</span>
                         </div>
                         <div>
@@ -102,7 +74,7 @@
                         </div>
                     </div>
                     <div class="d-flex">
-                        <div class="icon-circle me-3">
+                    <div class="icon-circle bg-warning text-dark d-flex justify-content-center align-items-center me-3 " style="width: 40px; height: 40px; border-radius: 20%;">
                             <span>8</span>
                         </div>
                         <div>
@@ -114,4 +86,5 @@
             </div>
         </div>
     </section>
+
 </x-layout-home>
