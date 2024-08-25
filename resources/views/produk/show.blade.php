@@ -17,10 +17,10 @@
                     </div>
                 @endif
 
-    <div class="container d-flex flex-sm-column flex-md-row gap-4">
-    <div class="w-100">
-        <img src="/{{ $produk->gambar }}" alt="{{ $produk->nama }}" class="img-fluid">
-    </div>
+    <div class="container d-flex flex-sm-column flex-md-row gap-4 py-5">
+        <div class="w-100">
+            <img src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}" class="img-fluid">
+        </div>
 
         <div class="w-50 shadow rounded p-2 h-50 gap-4 p-5">
             <h1>{{ $produk->nama }}</h1>

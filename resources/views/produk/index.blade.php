@@ -35,7 +35,7 @@
                     <img src="{{ asset('image/banner2.gif') }}" alt="Spanduk dan banner" class="img-fluid  kategori-image">
                 </div>
                 <p class="mt-2 text-dark">Spanduk</p>
-            </a>
+            </a>
         </div>
     </section>
 
@@ -44,7 +44,7 @@
         <div class="row justify-content-center gap-4 mb-3">
             @foreach($produk as $item)
             <a href="{{ route('produk.show', ['produk' => $item->id]) }}" class="col-md-3 col-sm-12 product-card d-flex justify-content-center align-items-center flex-column gap-2 p-3 rounded" style="text-decoration: none;">
-                <img src="{{ $item->gambar }}" alt="{{ $item->nama }}" class="img-fluid" style="width: 300px; height: 300px; object-fit: cover">
+                <img src="{{ Storage::url($item->gambar) }}" alt="{{ $item->nama }}" class="img-fluid" style="width: 300px; height: 300px; object-fit: cover">
                 <div>
                     <h4 class="product-name text-center">
                         {{ $item->nama }}
@@ -64,7 +64,7 @@
     .kategori-item {
         display: flex;
         flex-direction: column;
-        align-items: center; 
+        align-items: center;
         justify-content: center;
     }
 
