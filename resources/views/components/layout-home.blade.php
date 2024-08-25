@@ -16,10 +16,10 @@
             margin: 0;
         }
         .footer {
-            background-color: rgba(255, 165, 0, 0.8); 
-            color: #fff; 
+            background-color: rgba(255, 165, 0, 0.8);
+            color: #fff;
             padding: 40px 0;
-            border-top: 1px solid #e68a00; 
+            border-top: 1px solid #e68a00;
         }
         .footer-logo {
             max-width: 250px;
@@ -34,14 +34,14 @@
             margin-bottom: 10px;
         }
         .footer-link {
-            color: #fff; 
+            color: #fff;
             text-decoration: none;
             font-size: 16px;
             transition: color 0.3s, text-shadow 0.3s;
         }
         .footer-link:hover {
             color: #ff9f00;
-            text-shadow: 0 0 5px #ff9f00; 
+            text-shadow: 0 0 5px #ff9f00;
         }
         .footer-info {
             font-size: 16px;
@@ -75,16 +75,16 @@
             background: #e68a00;
         }
         .navbar-custom {
-            background-color: rgba(255, 165, 0, 0.8); 
-            border-bottom: 1px solid #e68a00; 
+            background-color: rgba(255, 165, 0, 0.8);
+            border-bottom: 1px solid #e68a00;
         }
         .navbar-nav .nav-item .nav-link {
-            padding: 0.5rem 1rem; 
+            padding: 0.5rem 1rem;
             transition: color 0.3s, text-shadow 0.3s;
         }
         .navbar-nav .nav-item .nav-link:hover {
-            color: #ff9f00; 
-            text-shadow: 0 0 5px #ff9f00; 
+            color: #ff9f00;
+            text-shadow: 0 0 5px #ff9f00;
         }
         .navbar-brand img {
             height: 32px;
@@ -103,7 +103,7 @@
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('image/dpc.png') }}" alt="Logo" class="img-fluid rounded-circle" style="width: 110px; height: 50px;">
-             </a>
+            </a>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -241,7 +241,7 @@
         </div>
     </div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
     function sendMessage() {
         var name = encodeURIComponent(document.getElementById('name').value);
