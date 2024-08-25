@@ -180,10 +180,10 @@
         <h1 class="text-center">Rumah Qeeta</h1>
         <p>Digital Printing Cepat</p>
     </div>
-    
+
     <section class="container my-4 about-us-section">
         <h1 style="font-weight: bold; font-size: 2.5rem; color: #ff8c00; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">Tentang Kami</h1>
-        
+
         <div class="about-us-text">
             <p>Mewujudkan <span class="highlight">kreativitas</span> Anda sejak tahun 2016. Kami siap membantu Anda dengan solusi percetakan yang cepat, tepat, dan berkualitas tinggi. Percayakan kebutuhan percetakan Anda Ke DPC RUMAH QEETA!</p>
         </div>
@@ -197,7 +197,7 @@
             <div class="product-scroll-content">
                 @foreach($produk as $item)
                 <a href="{{ route('produk.show', ['produk' => $item->id]) }}" class="product-card d-flex flex-column gap-2 p-3 rounded">
-                    <img src="{{ $item->gambar }}" alt="{{ $item->nama }}" class="img-fluid" style="width: 300px; height: 300px; object-fit: cover">
+                    <img src="{{ Storage::url($item->gambar) }}" alt="{{ $item->nama }}" class="img-fluid" style="width: 300px; height: 300px; object-fit: cover">
                     <div>
                         <h4 class="product-name text-center">{{ $item->nama }}</h4>
                         <p class="product-price text-center">Rp {{ number_format($item->harga, 0, ',', '.') }}</p>
