@@ -40,7 +40,7 @@
             </tr>
             @foreach ($produk as $item)
             <tr>
-                <td>{{ $item->id }}</td>
+                <td>{{ ($produk->currentpage()-1) * $produk->perpage() + $loop->index + 1 }}</td>
                 <td>
                     <img src="{{ asset('storage/produk/' . basename($item->gambar)) }}" alt="" width="100">
                 </td>
@@ -60,6 +60,6 @@
             @endforeach
         </table>
 
-        {{ $produk->links() }}
+        {{ $produk->appends(request()->query())->links() }}
     </div>
 </x-dashboard-template>

@@ -84,7 +84,7 @@
                 <tbody>
                     @foreach ($transaksi as $item)
                     <tr>
-                        <td>{{ $item->id }}</td>
+                        <td>{{ ($transaksi->currentpage()-1) * $transaksi->perpage() + $loop->index + 1 }}</td>
                         <td>{{ $item->status->display() }}</td>
                         <td>{{ $item->buktiPembayaran ? $item->buktiPembayaran->status->display() : "Belum Bayar" }}</td>
                         <td>{{ $item->layanan }}</td>
@@ -101,7 +101,7 @@
             </table>
 
             <div class="d-flex justify-content-center mt-4">
-                {{ $transaksi->links() }}
+                {{ $transaksi->appends(request()->query())->links() }}
             </div>
         </div>
     </div>

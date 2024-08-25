@@ -36,7 +36,7 @@
             </tr>
             @foreach ($kategori as $item)
             <tr>
-                <td>{{ $item->id }}</td>
+                <td>{{ ($kategori->currentpage()-1) * $kategori->perpage() + $loop->index + 1 }}</td>
                 <td>{{ $item->nama }}</td>
                 <td>
                     <form action="{{  route('master.kategori.destroy', ['kategori' => $item->id]) }}" method="post">
@@ -50,6 +50,6 @@
             @endforeach
         </table>
 
-        {{ $kategori->links() }}
+        {{ $kategori->appends(request()->query())->links() }}
     </div>
 </x-dashboard-template>

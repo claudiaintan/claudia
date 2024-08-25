@@ -38,7 +38,7 @@
             </tr>
             @foreach ($transaksi as $item)
             <tr>
-                <td>{{ $item->id }}</td>
+                <td>{{ ($transaksi->currentpage()-1) * $transaksi->perpage() + $loop->index + 1 }}</td>
                 <td>
                     {{ $item->pelanggan->user->name }}
                 </td>
@@ -58,6 +58,6 @@
             @endforeach
         </table>
 
-        {{ $transaksi->links() }}
+        {{ $transaksi->appends(request()->query())->links() }}
     </div>
 </x-dashboard-template>

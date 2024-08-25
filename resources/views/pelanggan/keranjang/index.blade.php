@@ -36,7 +36,7 @@
                 <tbody>
                     @foreach($keranjang as $key => $item)
                     <tr class="animate__animated animate__fadeInUp">
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ ($keranjang->currentpage()-1) * $keranjang->perpage() + $loop->index + 1 }}</td>
                         <td>{{ $item->produk->nama }}</td>
                         <td>{{ $item->jumlah }}</td>
                         <td>{{ $item->produk->bobot }} kg</td>
@@ -65,7 +65,7 @@
                 </tfoot>
             </table>
 
-            {{ $keranjang->links() }}
+            {{ $keranjang->appends(request()->query())->links() }}
         </div>
 
         <div class="w-50 shadow-lg rounded p-4 h-50 d-flex flex-column gap-4 bg-light animate__animated animate__fadeInRight" style="border-left: 5px solid #ffa500;">

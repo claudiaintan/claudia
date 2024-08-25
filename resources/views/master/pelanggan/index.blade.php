@@ -39,7 +39,7 @@
             </tr>
             @foreach ($user as $item)
             <tr>
-                <td>{{ $item->id }}</td>
+                <td>{{ ($user->currentpage()-1) * $user->perpage() + $loop->index + 1 }}</td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->email }}</td>
                 <td>{{ $item->pelanggan->alamat }}</td>
@@ -56,6 +56,6 @@
             @endforeach
         </table>
 
-        {{ $user->links() }}
+        {{ $user->appends(request()->query())->links() }}
     </div>
 </x-dashboard-template>
