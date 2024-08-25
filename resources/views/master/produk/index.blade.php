@@ -42,7 +42,7 @@
             <tr>
                 <td>{{ $item->id }}</td>
                 <td>
-                    <img src="/{{ $item->gambar }}" alt="" width="100">
+                    <img src="{{ asset('storage/produk/' . basename($item->gambar)) }}" alt="" width="100">
                 </td>
                 <td>{{ $item->nama }}</td>
                 <td>{{ $item->kategori->nama }}</td>

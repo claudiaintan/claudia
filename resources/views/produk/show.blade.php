@@ -19,7 +19,7 @@
 
     <div class="container d-flex flex-sm-column flex-md-row gap-4 py-5">
         <div class="w-100">
-            <img src="{{ Storage::url($produk->gambar) }}" alt="{{ $produk->nama }}" class="img-fluid">
+            <img src="{{ asset('storage/produk/' . basename($item->gambar)) }}" alt="{{ $produk->nama }}" class="img-fluid">
         </div>
 
         <div class="w-50 shadow rounded p-2 h-50 gap-4 p-5">
