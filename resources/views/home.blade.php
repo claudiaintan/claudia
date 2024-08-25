@@ -197,7 +197,7 @@
             <div class="product-scroll-content">
                 @foreach($produk as $item)
                 <a href="{{ route('produk.show', ['produk' => $item->id]) }}" class="product-card d-flex flex-column gap-2 p-3 rounded">
-                    <img src="{{ Storage::url($item->gambar) }}" alt="{{ $item->nama }}" class="img-fluid" style="width: 300px; height: 300px; object-fit: cover">
+                    <img src="{{ asset($item->gambar) }}" alt="{{ $item->nama }}" class="img-fluid" style="width: 300px; height: 300px; object-fit: cover">
                     <div>
                         <h4 class="product-name text-center">{{ $item->nama }}</h4>
                         <p class="product-price text-center">Rp {{ number_format($item->harga, 0, ',', '.') }}</p>
