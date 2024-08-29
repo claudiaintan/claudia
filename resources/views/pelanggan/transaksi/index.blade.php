@@ -90,7 +90,7 @@
                         <td>{{ $item->layanan }}</td>
                         <td>{{ $item->catatan }}</td>
                         <td>{{ $item->bobot() }} gr</td>
-                        <td>Rp {{ number_format($item->harga(), 0, ',', '.') }}</td>
+                        <td>Rp {{ number_format($item->total, 0, ',', '.') }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>
                             <a href="{{ route('transaksi.download', ['transaksi' => $item->id]) }}" class="btn btn-secondary">Unduh Nota</a>

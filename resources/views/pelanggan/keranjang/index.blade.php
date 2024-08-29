@@ -39,7 +39,7 @@
                         <td>{{ ($keranjang->currentpage()-1) * $keranjang->perpage() + $loop->index + 1 }}</td>
                         <td>{{ $item->produk->nama }}</td>
                         <td>{{ $item->jumlah }}</td>
-                        <td>{{ $item->produk->bobot }} kg</td>
+                        <td>{{ $item->produk->bobot }} gr</td>
                         <td>Rp {{ number_format($item->produk->harga, 0, ',', '.') }}</td>
                         <td class="text-center">
                             <form action="{{ route('pelanggan.keranjang.destroy', ['keranjang' => $item->id]) }}" method="post">
@@ -57,7 +57,7 @@
                     <tr>
                         <td colspan="2"><strong>Total</strong></td>
                         <td>{{ $keranjang->sum('jumlah') }}</td>
-                        <td>{{ $bobot }} kg</td>
+                        <td>{{ $bobot }} gr</td>
                         <td></td>
                         <td>Rp {{ number_format($total, 0, ',', '.') }}</td>
                         <td></td>
@@ -111,7 +111,7 @@
                     </p>
                     <input type="hidden" name="total" id="total">
                 </div>
-                <button type="submit" class="btn btn-orange btn-lg btn-block" style="background-color: #ffa500; color: white; font-weight: 600;">Beli Sekarang</button>
+                <button type="submit" class="btn btn-orange btn-lg btn-block" style="background-color: #ffa500; color: white; font-weight: 600;">Beli sekarang</button>
             </form>
         </div>
     </div>

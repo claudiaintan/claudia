@@ -32,9 +32,9 @@ class Transaksi extends Model
         return $this->belongsTo(Pelanggan::class);
     }
 
-    public function ongkir(): BelongsTo
+    public function ongkir()
     {
-        return $this->belongsTo(Ongkir::class);
+        return $this->belongsTo(Ongkir::class, 'ongkir_id'); 
     }
 
     public function barangTransaksi(): HasMany

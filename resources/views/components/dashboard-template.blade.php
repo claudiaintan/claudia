@@ -11,42 +11,51 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
         }
         .sidebar {
-            background: #333;
-            color: white;
+            background: #ffecd1;
+            color: #333;
             min-height: 100vh;
             width: 250px;
             position: fixed;
             font-weight: bold;
             transition: transform 0.3s ease;
             transform: translateX(0);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         }
         .sidebar.collapsed {
             transform: translateX(-250px);
         }
         .sidebar .nav-link {
-            color: white;
+            color: #333;
             font-weight: bold;
             display: flex;
             align-items: center;
             padding: 10px;
             text-decoration: none;
         }
+        .sidebar .nav-link:hover {
+            background-color: #ffb347;
+            color: white;
+            transition: 0.3s;
+        }
         .sidebar .nav-link .fa {
             margin-right: 20px;
         }
         .sidebar .nav-link.active {
-            background-color: #444;
+            background-color: #ffa07a;
             color: white;
         }
         .topbar {
-            background: #ff6600;
+            background: #ffb347;
             color: white;
             display: flex;
             align-items: center;
             padding: 0.5rem 1rem;
             font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .topbar img {
             height: 42px;
@@ -59,8 +68,6 @@
         .content {
             margin-left: 250px;
             padding: 20px;
-            font-weight: normal;
-            color: #333;
             transition: margin-left 0.3s ease;
         }
         .content.shifted {
@@ -69,7 +76,6 @@
         .dropdown-menu {
             font-weight: normal;
         }
-
         .select2-container {
             width: 100% !important;
         }
@@ -110,7 +116,7 @@
     <ul class="nav flex-column">
         <li class="nav-item">
             <a class="nav-link {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                <i class="fas fa-tachometer-alt"></i>
+                <i class="fas fa-chart-line"></i>
                 Dashboard
             </a>
         </li>
@@ -127,20 +133,20 @@
                 <ul class="nav flex-column ms-3">
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteName() == 'master.produk.index' ? 'active' : '' }}" href="{{ route('master.produk.index') }}">
-                            <i class="fas fa-box"></i>
+                            <i class="fas fa-boxes"></i>
                             Produk
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteName() == 'master.kategori.index' ? 'active' : '' }}" href="{{ route('master.kategori.index') }}">
-                            <i class="fas fa-tags"></i>
+                            <i class="fas fa-tag"></i>
                             Kategori
                         </a>
                     </li>
                     @if(auth()->user()->hasRole('ADMIN'))
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteName() == 'master.pelanggan.index' ? 'active' : '' }}" href="{{ route('master.pelanggan.index') }}">
-                            <i class="fas fa-users"></i>
+                            <i class="fas fa-user-friends"></i>
                             Pelanggan
                         </a>
                     </li>
@@ -175,7 +181,7 @@
     <ul class="nav flex-column">
         <li class="nav-item">
             <a class="nav-link {{ Route::currentRouteName() == 'profile.edit' ? 'active' : '' }}" href="{{ route('dashboard.profile.edit') }}">
-                <i class="fas fa-cogs"></i>
+                <i class="fas fa-user-cog"></i>
                 Pengaturan User
             </a>
         </li>
@@ -191,20 +197,13 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 <script>
-    document.getElementById('sidebar-hamburger').addEventListener('click', function() {
-        const sidebar = document.querySelector('.sidebar');
-        const content = document.querySelector('.content');
-        sidebar.classList.toggle('collapsed');
-        content.classList.toggle('shifted');
-    });
-    $(function () {
-        $('.select2').select2({
-            allowClear: true,
-        })
+    $(document).ready(function() {
+        $('#sidebar-hamburger').on('click', function() {
+            $('.sidebar').toggleClass('collapsed');
+            $('.content').toggleClass('shifted');
+        });
     });
 </script>
-@isset($scripts)
-    {{ $scripts }}
-@endisset
+
 </body>
 </html>

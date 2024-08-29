@@ -64,7 +64,7 @@
                 <th>No</th>
                 <th>Nama Pelanggan</th>
                 <th>Tanggal</th>
-                <th>Ongkir</th>
+                <th>Jenis Pengiriman</th>
                 <th>Status Pembayaran</th>
                 <th>Total</th>
             </tr>
@@ -75,9 +75,9 @@
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->pelanggan->user->name }}</td>
                 <td>{{ $item->created_at->format('d-m-Y H:i:s') }}</td>
-                <td>{{ $item->ongkir ? $item->ongkir->nama : 'Tidak Ada Ongkir' }}</td>
+                <td>{{ $item->layanan }}</td>
                 <td>{{ $item->buktiPembayaran ? $item->buktiPembayaran->status->display() : 'Belum Bayar' }}</td>
-                <td>Rp {{ number_format(($item->harga() ?? 0) + ($item->ongkir->harga ?? 0), 0, ',', '.') }}</td>
+                <td>Rp {{ number_format($item->total, 0, ',', '.') }}</td>
             </tr>
             @endforeach
         </tbody>

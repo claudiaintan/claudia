@@ -31,7 +31,8 @@ class TransaksiController extends Controller
 
     public function download($id)
     {
-        $transaksi = Transaksi::find($id);
+        $transaksi = Transaksi::with(['pelanggan.user', 'barangTransaksi.produk', 'buktiPembayaran', 'ongkir'])->find($id);
+
 
         // Generate PDF using Barryvdh\DomPDF\Facade\Pdf
         $pdf = Pdf::loadView('pdf.history', compact('transaksi'));

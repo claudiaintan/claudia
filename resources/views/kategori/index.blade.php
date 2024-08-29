@@ -5,36 +5,36 @@
 <!-- Kategori Navbar -->
 <section class="container my-4">
         <div class="d-flex justify-content-around overflow-auto">
-            <a href="{{ route('produk.byKategori', ['kategoriId' => 6]) }}" class="text-center text-decoration-none kategori-item">
+            <a href="{{ route('produk.byKategori', ['kategoriId' => 1]) }}" class="text-center text-decoration-none kategori-item">
                 <div class="kategori-image-wrapper">
                     <img src="{{ asset('image/banner.gif') }}" alt="Spanduk dan banner" class="img-fluid  kategori-image">
                 </div>
                 <p class="mt-2 text-dark">Banner</p>
             </a>
-            <a href="{{ route('produk.byKategori', ['kategoriId' => 1]) }}" class="text-center text-decoration-none kategori-item">
+            <a href="{{ route('produk.byKategori', ['kategoriId' => 2]) }}" class="text-center text-decoration-none kategori-item">
                 <div class="kategori-image-wrapper">
                     <img src="{{ asset('image/sticker.gif') }}" alt="Stiker dan label" class="img-fluid  kategori-image">
                 </div>
                 <p class="mt-2 text-dark">Stiker dan Label</p>
             </a>
-            <a href="{{ route('produk.byKategori', ['kategoriId' => 4]) }}" class="text-center text-decoration-none kategori-item">
+            <a href="{{ route('produk.byKategori', ['kategoriId' => 3]) }}" class="text-center text-decoration-none kategori-item">
                 <div class="kategori-image-wrapper">
                     <img src="{{ asset('image/bag.gif') }}" alt="Merchandise dan souvenir" class="img-fluid  kategori-image">
                 </div>
                 <p class="mt-2 text-dark">Merchandise dan Souvenir</p>
             </a>
-            <a href="{{ route('produk.byKategori', ['kategoriId' => 3]) }}" class="text-center text-decoration-none kategori-item">
+            <a href="{{ route('produk.byKategori', ['kategoriId' => 4]) }}" class="text-center text-decoration-none kategori-item">
                 <div class="kategori-image-wrapper">
                     <img src="{{ asset('image/printer.gif') }}" alt="Print kertas" class="img-fluid  kategori-image">
                 </div>
                 <p class="mt-2 text-dark">Print Kertas</p>
             </a>
-            <a href="{{ route('produk.byKategori', ['kategoriId' => 2]) }}" class="text-center text-decoration-none kategori-item">
+            <a href="{{ route('produk.byKategori', ['kategoriId' => 5]) }}" class="text-center text-decoration-none kategori-item">
                 <div class="kategori-image-wrapper">
                     <img src="{{ asset('image/banner2.gif') }}" alt="Spanduk dan banner" class="img-fluid  kategori-image">
                 </div>
                 <p class="mt-2 text-dark">Spanduk</p>
-            </a>
+            </a>
         </div>
     </section>
 

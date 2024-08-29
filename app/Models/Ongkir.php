@@ -21,4 +21,5 @@ class Ongkir extends Model
     {
         return $this->hasMany(Keranjang::class);
     }
+    
 }
