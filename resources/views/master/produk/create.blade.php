@@ -21,7 +21,7 @@
 
             <div class="form-group">
                 <label for="harga" class="form-label">Harga</label>
-                <input type="text" name="harga" id="harga" placeholder="Harga" class="form-control" oninput="formatNumber(this)">
+                <input type="number" name="harga" id="harga" placeholder="Harga" class="form-control" oninput="formatNumber(this)">
             </div>
 
             <div class="form-group">
@@ -30,6 +30,11 @@
                 <input type="number" name="bobot" id="bobot" placeholder="Bobot" class="form-control" min="0">
                 <span class="input-group-text">gr</span>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label for="stok" class="form-label">Stok</label>
+                <input type="number" name="stok" id="stok" placeholder="Stok Barang" class="form-control" min="0">
             </div>
 
             <div class="form-group">

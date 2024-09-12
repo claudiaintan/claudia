@@ -6,6 +6,7 @@ use App\Models\Keranjang;
 use App\Http\Requests\StoreKeranjangRequest;
 use App\Http\Requests\UpdateKeranjangRequest;
 use App\Models\Ongkir;
+use App\Models\Produk;
 use App\Services\RajaOngkirService;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,11 +57,28 @@ class KeranjangController extends Controller
     public function store(StoreKeranjangRequest $request)
     {
         $data = $request->validated();
-        $data['file'] = $request->file('file')->storePublicly('public/file');
-        $data['file'] = str_replace('public/', 'storage/', $data['file']);
+
+        $produk = Produk::findOrFail($data['produk_id']);
+
+        if ($data['jumlah'] > $produk->stok) {
+            return redirect()->back()->withErrors(["jumlah" => "Jumlah pembelian melebihi stok yang tersedia!"]);
+        }
+
+        if ($request->hasFile('file')) {
+            $data['file'] = $request->file('file')->storePublicly('public/file');
+            $data['file'] = str_replace('public/', 'storage/', $data['file']);
+        } else {
+            $data['file'] = null; // Set file ke null jika tidak ada file yang diupload
+        }
+
         if (auth()->user()->pelanggan->keranjang()->create($data)) {
+            // Kurangi stok produk
+            $produk->stok -= $data['jumlah'];
+            $produk->save();
+
             return redirect()->back()->with('message', 'Berhasil masuk keranjang');
         }
+
         return redirect()->back()->withErrors(["Gagal masuk keranjang"]);
     }
 

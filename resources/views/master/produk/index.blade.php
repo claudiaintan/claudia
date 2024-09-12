@@ -36,6 +36,7 @@
                 <td>Kategori</td>
                 <td>Harga</td>
                 <td>Bobot</td>
+                <td>Stok</td>
                 <td>Aksi</td>
             </tr>
             @foreach ($produk as $item)
@@ -48,6 +49,7 @@
                 <td>{{ $item->kategori->nama }}</td>
                 <td>Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
                 <td>{{ $item->bobot }} gr</td>
+                <td>{{ $item->stok }}</td>
                 <td>
                     <form action="{{  route('master.produk.destroy', ['produk' => $item->id]) }}" method="post">
                         @csrf

@@ -36,15 +36,30 @@ class ProdukController extends Controller
     public function store(StoreProdukRequest $request)
     {
         $data = $request->validated();
-        $data['harga'] = intval(str_replace('.', '', $data['harga']));
-        $data['gambar'] = $request->file('gambar')->storePublicly('public/produk');
-        $data['gambar'] = str_replace('public/', 'storage/', $data['gambar']);
+    
+        if (isset($data['harga'])) {
+            $data['harga'] = intval(str_replace('.', '', $data['harga']));
+        }
+    
+        if (isset($data['stok'])) {
+            $data['stok'] = intval(str_replace('.', '', $data['stok']));
+        }
+    
+        if ($request->hasFile('gambar')) {
+            $data['gambar'] = $request->file('gambar')->storePublicly('public/produk');
+            $data['gambar'] = str_replace('public/', 'storage/', $data['gambar']);
+        } else {
+            $data['gambar'] = null; 
+        }
+    
         if (Produk::create($data)) {
             return redirect()->route('master.produk.index')->with('message', 'Data berhasil ditambah!');
         }
+    
         return redirect()->back()->withErrors(["Data gagal ditambah!"]);
     }
-
+    
+    
     /**
      * Display the specified resource.
      */
@@ -70,17 +85,26 @@ class ProdukController extends Controller
     public function update(UpdateProdukRequest $request, Produk $produk)
     {
         $data = $request->validated();
+    
         $data['harga'] = intval(str_replace('.', '', $data['harga']));
-
-        $data['gambar'] = $request->file('gambar')->storePublicly('public/produk');
-        $data['gambar'] = str_replace('public/', 'storage/', $data['gambar']);
+        $data['stok'] = intval(str_replace('.', '', $data['stok']));
+    
+        if ($request->hasFile('gambar')) {
+            $data['gambar'] = $request->file('gambar')->storePublicly('public/produk');
+            $data['gambar'] = str_replace('public/', 'storage/', $data['gambar']);
+        } else {
+            $data['gambar'] = $produk->gambar;
+        }
+    
         $produk->fill($data);
-
+    
         if ($produk->save()) {
             return redirect()->route('master.produk.index')->with('message', 'Data berhasil disimpan!');
         }
+    
         return redirect()->back()->withErrors(["Data gagal disimpan!"]);
     }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -25,6 +25,7 @@ class StoreProdukRequest extends FormRequest
             'nama' => ['required', 'string', 'max:255'],
             'kategori_id' => ['required', 'string', 'exists:kategoris,id'],
             'harga' => ['required', 'string', 'max:512'],
+            'stok' => 'required|numeric',
             'bobot' => ['required', 'numeric', "min:0"],
             'gambar' => ['required', 'image'],
         ];

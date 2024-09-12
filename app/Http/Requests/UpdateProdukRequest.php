@@ -25,8 +25,9 @@ class UpdateProdukRequest extends FormRequest
             'nama' => ['required', 'string', 'max:255'],
             'kategori_id' => ['required', 'string', 'exists:kategoris,id'],
             'harga' => ['required', 'string', 'max:512'],
+            'stok' => 'required|numeric',
             'bobot' => ['required', 'numeric', "min:0"],
-            'gambar' => ['required', 'image'],
+            'gambar' => ['nullable|image|mimes:jpeg,png,jpg|max:2048'],
         ];
     }
 }
