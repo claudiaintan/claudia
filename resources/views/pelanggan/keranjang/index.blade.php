@@ -180,7 +180,6 @@
         }
 
         $(document).ready(function() {
-            // Fungsi untuk menghitung estimasi pengerjaan
             function hitungEstimasi(jumlah) {
                 if (jumlah < 10) {
                     return '1 hari'; // Minimal 1 hari untuk < 10 item
@@ -196,22 +195,17 @@
                 }
             }
 
-            // Event handler untuk membuka modal
             $('#modalBuktiBayar').on('show.bs.modal', function (e) {
-                // Ambil data dari form
                 var daftarProduk = '';
                 var totalBayar = $('#totalBayar').text();
                 
-                // Ambil data produk dari keranjang
                 @foreach($keranjang as $item)
                     daftarProduk += '<li>' + '{{ $item->produk->nama }}' + ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' + '{{ $item->jumlah }}' + ' pcs</li>';
                 @endforeach
 
-                // Hitung estimasi pengerjaan berdasarkan jumlah produk
                 var jumlahTotalItem = {{ $keranjang->sum('jumlah') }};
                 var estimasiPengerjaan = hitungEstimasi(jumlahTotalItem);
 
-                // Update informasi di modal
                 $('#estimasiPengerjaan').text(estimasiPengerjaan);
                 $('#daftarProduk').html(daftarProduk);
                 $('#totalBayarModal').text(totalBayar);
@@ -219,14 +213,11 @@
         });
 
         function submitForm() {
-        // Mengambil formulir utama dan formulir modal
         var mainForm = document.getElementById('mainForm');
         var modalForm = document.getElementById('modalForm');
         
-        // Mengambil data dari form utama
         var formData = new FormData(mainForm);
 
-        // Menambahkan data dari form utama ke form modal
         for (var pair of formData.entries()) {
             var input = document.createElement('input');
             input.type = 'hidden';
@@ -235,14 +226,12 @@
             modalForm.appendChild(input);
         }
         
-        // Menyubmit formulir modal
         modalForm.submit();
     }
 
     </script>
     @endslot
 
-    <!-- Modal Bukti Pembayaran -->
     <div class="modal fade" id="modalBuktiBayar" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -251,18 +240,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Informasi Estimasi Pengerjaan -->
                     <div class="alert alert-info">
                         Estimasi Pengerjaan: <span id="estimasiPengerjaan"></span>
                     </div>
 
-                    <!-- Daftar Produk dan Jumlah -->
                     <div class="mb-3">
                         <strong>Pesanan Produk:</strong>
                         <ul id="daftarProduk" class="list-unstyled"></ul>
                     </div>
 
-                    <!-- Total Bayar -->
                     <div class="mb-3">
                         <strong>Total Bayar:</strong> <span id="totalBayarModal"></span>
                     </div>
