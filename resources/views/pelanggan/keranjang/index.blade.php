@@ -196,6 +196,14 @@
             }
 
             $('#modalBuktiBayar').on('show.bs.modal', function (e) {
+                $('#modalOrigin').val($('#origin').val());
+                $('#modalDestination').val($('#destination').val());
+                $('#modalCatatan').val($('#catatan').val());
+                $('#modalKurir').val($('#kurir').val());
+                $('#modalLayanan').val($('#layanans').val());
+                $('#modalTotal').val($('#total').val());
+
+                // Ambil data produk dari keranjang
                 var daftarProduk = '';
                 var totalBayar = $('#totalBayar').text();
                 
@@ -236,10 +244,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Informasi Pembayaran</h5>
+                    <h5 class="modal-title" id="modalLabel">Bukti Pembayaran</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="alert alert-warning">
+                        <strong>Pemberitahuan:</strong> Pastikan pembayaran Anda sudah lunas sebelum mengunggah bukti pembayaran. Total tagihan adalah <span id="totalBayarModal"></span>.
+                    </div>
+
                     <div class="alert alert-info">
                         Estimasi Pengerjaan: <span id="estimasiPengerjaan"></span>
                     </div>
@@ -249,12 +261,15 @@
                         <ul id="daftarProduk" class="list-unstyled"></ul>
                     </div>
 
-                    <div class="mb-3">
-                        <strong>Total Bayar:</strong> <span id="totalBayarModal"></span>
-                    </div>
-
                     <form action="{{ route('pelanggan.transaksi.store') }}" method="post" enctype="multipart/form-data" id="modalForm">
                         @csrf
+                        <input type="hidden" name="origin" id="modalOrigin">
+                        <input type="hidden" name="destination" id="modalDestination">
+                        <input type="hidden" name="catatan" id="modalCatatan">
+                        <input type="hidden" name="kurir" id="modalKurir">
+                        <input type="hidden" name="layanan" id="modalLayanan">
+                        <input type="hidden" name="total" id="modalTotal">
+                        
                         <div class="form-group">
                             <label for="bayar" class="text-orange" style="font-weight: 600;">Unggah Bukti Bayar</label>
                             <input type="file" name="bayar" id="bayar" class="form-control" style="background-color: #fff8e1; border-color: #ffa500;">
