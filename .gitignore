@@ -1,6 +1,8 @@
 /.phpunit.cache
 /node_modules
 /public/build
+/public/storage/bukti
+/public/storage/file
 /public/hot
 /storage/*.key
 /vendor
