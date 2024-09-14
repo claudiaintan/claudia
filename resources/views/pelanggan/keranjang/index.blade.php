@@ -69,7 +69,7 @@
         </div>
 
         <div class="w-50 shadow-lg rounded p-4 h-50 d-flex flex-column gap-4 bg-light animate__animated animate__fadeInRight" style="border-left: 5px solid #ffa500;">
-            <form action="{{ route('pelanggan.transaksi.store') }}" class="d-flex flex-column gap-4 w-100" enctype='multipart/form-data' method="post">
+            <form action="{{ route('pelanggan.transaksi.store') }}" class="d-flex flex-column gap-4 w-100" enctype='multipart/form-data' method="post" id="mainForm">
                 @csrf
                 @method('POST')
 
@@ -107,7 +107,7 @@
                     </p>
                     <input type="hidden" name="total" id="total">
                     <button type="button" class="btn btn-orange btn-lg" style="background-color: #ffa500; color: white; font-weight: 600;" data-bs-toggle="modal" data-bs-target="#modalBuktiBayar">
-                        Beli sekarang
+                        Pesan sekarang
                     </button>
                 </div>
             </form>
@@ -178,29 +178,109 @@
                 }
             });
         }
+
+        $(document).ready(function() {
+            // Fungsi untuk menghitung estimasi pengerjaan
+            function hitungEstimasi(jumlah) {
+                if (jumlah < 10) {
+                    return '1 hari'; // Minimal 1 hari untuk < 10 item
+                } else if (jumlah >= 10 && jumlah <= 20) {
+                    return '1-2 hari';
+                } else if (jumlah > 20 && jumlah <= 30) {
+                    return '2-3 hari';
+                } else if (jumlah > 30 && jumlah <= 40) {
+                    return '3-4 hari';
+                } else {
+                    var tambahanHari = Math.ceil((jumlah - 40) / 10);
+                    return (3 + tambahanHari) + '-' + (4 + tambahanHari) + ' hari';
+                }
+            }
+
+            // Event handler untuk membuka modal
+            $('#modalBuktiBayar').on('show.bs.modal', function (e) {
+                // Ambil data dari form
+                var daftarProduk = '';
+                var totalBayar = $('#totalBayar').text();
+                
+                // Ambil data produk dari keranjang
+                @foreach($keranjang as $item)
+                    daftarProduk += '<li>' + '{{ $item->produk->nama }}' + ' &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ' + '{{ $item->jumlah }}' + ' pcs</li>';
+                @endforeach
+
+                // Hitung estimasi pengerjaan berdasarkan jumlah produk
+                var jumlahTotalItem = {{ $keranjang->sum('jumlah') }};
+                var estimasiPengerjaan = hitungEstimasi(jumlahTotalItem);
+
+                // Update informasi di modal
+                $('#estimasiPengerjaan').text(estimasiPengerjaan);
+                $('#daftarProduk').html(daftarProduk);
+                $('#totalBayarModal').text(totalBayar);
+            });
+        });
+
+        function submitForm() {
+        // Mengambil formulir utama dan formulir modal
+        var mainForm = document.getElementById('mainForm');
+        var modalForm = document.getElementById('modalForm');
+        
+        // Mengambil data dari form utama
+        var formData = new FormData(mainForm);
+
+        // Menambahkan data dari form utama ke form modal
+        for (var pair of formData.entries()) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = pair[0];
+            input.value = pair[1];
+            modalForm.appendChild(input);
+        }
+        
+        // Menyubmit formulir modal
+        modalForm.submit();
+    }
+
     </script>
     @endslot
 
     <!-- Modal Bukti Pembayaran -->
     <div class="modal fade" id="modalBuktiBayar" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="modalLabel">Bukti Pembayaran</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-            <label for="bayar" class="text-orange" style="font-weight: 600;">Unggah Bukti Bayar</label>
-            <input type="file" name="bayar" id="bayar" class="form-control" style="background-color: #fff8e1; border-color: #ffa500;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Bukti Pembayaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Informasi Estimasi Pengerjaan -->
+                    <div class="alert alert-info">
+                        Estimasi Pengerjaan: <span id="estimasiPengerjaan"></span>
+                    </div>
+
+                    <!-- Daftar Produk dan Jumlah -->
+                    <div class="mb-3">
+                        <strong>Pesanan Produk:</strong>
+                        <ul id="daftarProduk" class="list-unstyled"></ul>
+                    </div>
+
+                    <!-- Total Bayar -->
+                    <div class="mb-3">
+                        <strong>Total Bayar:</strong> <span id="totalBayarModal"></span>
+                    </div>
+
+                    <form action="{{ route('pelanggan.transaksi.store') }}" method="post" enctype="multipart/form-data" id="modalForm">
+                        @csrf
+                        <div class="form-group">
+                            <label for="bayar" class="text-orange" style="font-weight: 600;">Unggah Bukti Bayar</label>
+                            <input type="file" name="bayar" id="bayar" class="form-control" style="background-color: #fff8e1; border-color: #ffa500;">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-orange" style="background-color: #ffa500; color: white;" onclick="submitForm()">Pesan</button>
+                </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-orange" style="background-color: #ffa500; color: white;">Kirim Pembayaran</button>
-        </div>
-        </div>
-    </div>
     </div>
 
 </x-layout-home>
