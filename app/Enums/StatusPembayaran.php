@@ -15,7 +15,7 @@ enum StatusPembayaran: string
     {
         return match ($this) {
             StatusPembayaran::LUNAS => "Lunas",
-            StatusPembayaran::BELUM_LUNAS => "Belum Lunas",
+            StatusPembayaran::BELUM_LUNAS => "Menunggu Konfirmasi",
         };
     }
 }
