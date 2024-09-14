@@ -101,22 +101,22 @@
                     <select id="layanans" class="form-select" disabled required style="background-color: #fff8e1; border-color: #ffa500;"></select>
                     <input type="hidden" name="layanan" id="layanan">
                 </div>
-                <div class="form-group">
-                    <label for="bayar" class="text-orange" style="font-weight: 600;">Bukti Bayar</label>
-                    <input type="file" name="bayar" id="bayar" class="form-control" style="background-color: #fff8e1; border-color: #ffa500;">
-                </div>
                 <div class="form-group d-flex justify-content-between align-items-center">
                     <p class="m-0 text-orange" style="font-weight: 700;">
                         Total Bayar : <span id="totalBayar">Rp {{ number_format($total, 0, ',', '.') }}</span>
                     </p>
                     <input type="hidden" name="total" id="total">
-                    <button type="submit" class="btn btn-orange btn-lg" style="background-color: #ffa500; color: white; font-weight: 600;">Beli sekarang</button>
+                    <button type="button" class="btn btn-orange btn-lg" style="background-color: #ffa500; color: white; font-weight: 600;" data-bs-toggle="modal" data-bs-target="#modalBuktiBayar">
+                        Beli sekarang
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
     @slot('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script>
         $(function () {
             $('#layanans').change(function (e) {
@@ -180,4 +180,27 @@
         }
     </script>
     @endslot
+
+    <!-- Modal Bukti Pembayaran -->
+    <div class="modal fade" id="modalBuktiBayar" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel">Bukti Pembayaran</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+            <label for="bayar" class="text-orange" style="font-weight: 600;">Unggah Bukti Bayar</label>
+            <input type="file" name="bayar" id="bayar" class="form-control" style="background-color: #fff8e1; border-color: #ffa500;">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-orange" style="background-color: #ffa500; color: white;">Kirim Pembayaran</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
 </x-layout-home>
