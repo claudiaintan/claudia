@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreProdukRequest;
 use App\Http\Requests\UpdateProdukRequest;
 use App\Models\Kategori;
@@ -13,10 +14,26 @@ class ProdukController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Inisialisasi query produk dengan eager loading kategori
+        $query = Produk::with('kategori');
+
+        // Cek apakah ada parameter sorting dari request
+        if ($request->has('sort_by') && $request->has('sort_order')) {
+            $sortBy = $request->input('sort_by');
+            $sortOrder = $request->input('sort_order');
+
+            // Sorting berdasarkan kolom yang dipilih
+            $query->orderBy($sortBy, $sortOrder);
+        }
+
+        // Paginate hasil query dengan 10 item per halaman
+        $produk = $query->paginate(10);
+
+        // Kembalikan view dengan data produk yang telah diurutkan dan dipaginate
         return view('master.produk.index', [
-            'produk' => Produk::with('kategori')->paginate(10),
+            'produk' => $produk,
         ]);
     }
 
