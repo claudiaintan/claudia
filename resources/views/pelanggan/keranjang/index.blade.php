@@ -182,16 +182,16 @@
         $(document).ready(function() {
             function hitungEstimasi(jumlah) {
                 if (jumlah < 10) {
-                    return '1 hari'; // Minimal 1 hari untuk < 10 item
-                } else if (jumlah >= 10 && jumlah <= 20) {
                     return '1-2 hari';
+                } else if (jumlah >= 10 && jumlah <= 20) {
+                    return '2-4 hari'; 
                 } else if (jumlah > 20 && jumlah <= 30) {
-                    return '2-3 hari';
+                    return '5-8 hari';
                 } else if (jumlah > 30 && jumlah <= 40) {
-                    return '3-4 hari';
+                    return '8-10 hari'; 
                 } else {
-                    var tambahanHari = Math.ceil((jumlah - 40) / 10);
-                    return (3 + tambahanHari) + '-' + (4 + tambahanHari) + ' hari';
+                    var tambahanHari = Math.ceil((jumlah - 40) / 10); // Hitung tambahan hari untuk item > 40
+                    return (10 + tambahanHari) + '-' + (12 + tambahanHari) + ' hari'; // Rentang hari 10-12 hari ditambah tambahan hari
                 }
             }
 
