@@ -60,10 +60,15 @@
                         <td>{{ $bobot }} gr</td>
                         <td></td>
                         <td>Rp {{ number_format($total, 0, ',', '.') }}</td>
-                        <td></td>
                     </tr>
                 </tfoot>
             </table>
+
+            <div class="text-center mt-4">
+                <a href="{{ route('produk.index') }}" class="btn btn-warning btn-lg" style="font-weight: 600;">
+                    <i class="fas fa-plus"></i> Tambah Produk Lainnya
+                </a>
+            </div>
 
             {{ $keranjang->appends(request()->query())->links() }}
         </div>
