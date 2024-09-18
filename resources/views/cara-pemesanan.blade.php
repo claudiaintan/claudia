@@ -14,7 +14,7 @@
                         </div>
                         <div>
                             <h4>Login</h4>
-                            <p>Tes Pull Github</p>
+                            <p>Masuk ke akun Anda untuk mengakses fitur pemesanan.</p>
                         </div>
                     </div>
                     <div class="d-flex mb-4">
